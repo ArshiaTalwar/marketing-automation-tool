@@ -1,0 +1,620 @@
+/* ============================================
+   MARKETING AUTOMATION DASHBOARD - CSS
+   CORRECTED VERSION - Fixed viewport issue
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f0f2f5;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* DASHBOARD MAIN CONTAINER */
+.dashboard {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f0f2f5 0%, #d9dce0 100%);
+  overflow: hidden;
+}
+
+/* HEADER SECTION */
+.dashboard-header {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.header-content p {
+  font-size: 0.95rem;
+  opacity: 0.95;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.upload-button,
+.refresh-button {
+  padding: 0.7rem 1.3rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.upload-button {
+  background: white;
+  color: #667eea;
+}
+
+.upload-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-button {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.refresh-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+/* UPLOAD STATUS MESSAGE */
+.upload-status {
+  width: 100%;
+  padding: 1rem 2rem;
+  margin: 0;
+  border-radius: 0;
+  font-weight: 600;
+  animation: slideDown 0.3s ease-out;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.upload-status.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+.upload-status.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TABS NAVIGATION */
+.tabs {
+  width: 100%;
+  display: flex;
+  gap: 0;
+  background: white;
+  padding: 0;
+  margin: 0;
+  border-bottom: 2px solid #e0e0e0;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 120px;
+  text-align: center;
+}
+
+.tab:hover {
+  background: #f8f9fa;
+  color: #667eea;
+}
+
+.tab.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+  background: #f8f9fa;
+}
+
+/* MAIN CONTENT AREA */
+.dashboard-content {
+  width: 100%;
+  flex: 1;
+  padding: 2rem;
+  background: white;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  font-size: 1.3rem;
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* STATISTICS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 0.6rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  align-items: flex-start;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 0.3rem;
+  word-break: break-word;
+}
+
+.stat-subtext {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 500;
+}
+
+/* CHART CONTAINERS */
+.chart-container {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 0.6rem;
+  border: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+.chart-container h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* TABLES */
+.table-container {
+  overflow-x: auto;
+  border-radius: 0.4rem;
+  border: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+.metrics-table,
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.metrics-table thead,
+.logs-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+.metrics-table th,
+.logs-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.metrics-table td,
+.logs-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.metrics-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.campaign-name {
+  font-weight: 600;
+  color: #667eea;
+  text-transform: capitalize;
+}
+
+.number {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  color: #333;
+}
+
+.number.positive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.number.negative {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.status.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* RESPONSIVE DESIGN - TABLET */
+@media (max-width: 1024px) {
+  .dashboard-header {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.7rem;
+  }
+
+  .dashboard-content {
+    padding: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .stat-card {
+    padding: 1.2rem;
+  }
+}
+
+/* RESPONSIVE DESIGN - SMALL TABLET */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1rem;
+    gap: 1rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.4rem;
+  }
+
+  .header-content p {
+    font-size: 0.85rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .upload-button,
+  .refresh-button {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .dashboard-content {
+    padding: 1.2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .stat-icon {
+    min-width: auto;
+    font-size: 2rem;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+
+  .tabs {
+    overflow-x: auto;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    min-width: 100px;
+    font-size: 0.8rem;
+  }
+
+  .chart-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .chart-container h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .metrics-table,
+  .logs-table {
+    font-size: 0.8rem;
+  }
+
+  .metrics-table th,
+  .logs-table th,
+  .metrics-table td,
+  .logs-table td {
+    padding: 0.7rem;
+  }
+}
+
+/* RESPONSIVE DESIGN - MOBILE */
+@media (max-width: 480px) {
+  .dashboard {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .dashboard-header {
+    padding: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.1rem;
+  }
+
+  .header-content p {
+    font-size: 0.75rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .upload-button,
+  .refresh-button {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 0.8rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stat-value {
+    font-size: 1.1rem;
+  }
+
+  .stat-subtext {
+    font-size: 0.7rem;
+  }
+
+  .tab {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+    min-width: 80px;
+  }
+
+  .chart-container {
+    padding: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .chart-container h2 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .metrics-table,
+  .logs-table {
+    font-size: 0.7rem;
+  }
+
+  .metrics-table th,
+  .logs-table th,
+  .metrics-table td,
+  .logs-table td {
+    padding: 0.5rem;
+  }
+
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* EXTRA SMALL MOBILE */
+@media (max-width: 360px) {
+  .header-content h1 {
+    font-size: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+  }
+
+  .upload-button,
+  .refresh-button {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .tab {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.65rem;
+    min-width: 70px;
+  }
+}
+
+/* END OF CSS */
